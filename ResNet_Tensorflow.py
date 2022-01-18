@@ -79,3 +79,8 @@ def ResNet34(shape, classes):
     
     model = tf.keras.models.Model(inputs = x_input, outputs = x, name = "ResNet34")
     return model
+
+resnet = ResNet34((256, 256, 3), 100)
+print(resnet.summary())
+# For compiling the model use Adam Optimizer or SGD Optimizer
+# loss = categorical_crossentropy
