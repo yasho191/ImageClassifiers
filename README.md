@@ -4,7 +4,7 @@ An attempt to code differnt SOTA deep learning models using Tensorflow and PyTor
 
 ## Alexnet
 
-Designed by Alex Krizhevsky in collaboration with Ilya Sutskever and Geoffrey Hinton
+Designed by Alex Krizhevsky in collaboration with Ilya Sutskever and Geoffrey Hinton (ImageNet Classification with Deep Convolutional Neural Networks)
 
 AlexNet competed in the ImageNet Large Scale Visual Recognition Challenge on September 30, 2012. The network achieved a top-5 error of 15.3%, more than 10.8 percentage points lower than that of the runner up. The original paper's primary result was that the depth of the model was essential for its high performance, which was computationally expensive, but made feasible due to the utilization of graphics processing units (GPUs) during training.
 
