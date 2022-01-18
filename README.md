@@ -1,6 +1,6 @@
 # Deep-Learning-Implementation
 
-An attempt to code differnt SOTA deep learning models using Tensorflow, Keras and PyTorch
+An attempt to code differnt SOTA deep learning models using Tensorflow and PyTorch
 
 ## Alexnet
 
