@@ -1,4 +1,4 @@
-# Deep-Learning-Implementation
+# Code that NeuralNet
 
 An attempt to code differnt SOTA deep learning models using Tensorflow and PyTorch
 
