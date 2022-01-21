@@ -13,12 +13,12 @@ def AlexNet():
     x_input = Input(shape=(227, 227, 3))
     # 2 Conv BLocks with MaxPooling
     x = conv_block(x_input, (11, 11), 96, 4, (3, 3), 2)
-    x = conv_block(x, (5, 5), 256, 2, (3, 3), 2)
+    x = conv_block(x, (5, 5), 256, 1, (3, 3), 2)
     # 2 Conv Layers without Maxpooling
     x = Conv2D(kernel_size=(3,3), filters=384, padding='same', activation='relu')(x)
     x = Conv2D(kernel_size=(3,3), filters=384, padding='same', activation='relu')(x)
     # 1 Conv block with MaxPooling
-    x = conv_block(x, (3, 3), 256, 2, (3, 3), 2)
+    x = conv_block(x, (3, 3), 256, 1, (3, 3), 2)
     x = Flatten()(x)
     # Fully connected layers with Dropout
     x = Dense(4096, activation='relu')(x)
