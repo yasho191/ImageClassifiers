@@ -36,3 +36,13 @@ Residual Networks, or ResNets, learn residual functions with reference to the la
 <img src='Assets/ResNet.png'/>
 
 [More about ResNet](https://paperswithcode.com/method/resnet)
+
+## InceptionNetV3
+
+Introduced by Szegedy et al. in Rethinking the Inception Architecture for Computer Vision
+
+Inception-v3 is a convolutional neural network architecture from the Inception family that makes several improvements including using Label Smoothing, Factorized 7 x 7 convolutions, and the use of an auxiliary classifer to propagate label information lower down the network (along with the use of batch normalization for layers in the sidehead).
+
+<img src="Assets/InceptionV3Architecture.png"/>
+
+[More about InceptionV3](https://paperswithcode.com/method/inception-v3)
