@@ -1,1 +1,3 @@
 *.DS_Store
+*.amlignore
+*.amlignore_amltmp
