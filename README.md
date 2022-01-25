@@ -54,3 +54,17 @@ Inception-v3 is a convolutional neural network architecture from the Inception f
 <img src="Assets/InceptionV3Architecture.png"/>
 
 [More about InceptionV3](https://paperswithcode.com/method/inception-v3)
+
+## Upcoming Neural Networks
+
+### Image Classification:
+
+1. DenseNet
+2. EfficientNet
+3. Vision Transformer
+
+### AutoEncoders:
+
+1. Simple VAE
+2. RedNEet (Image Restoration Using Very Deep Convolutional Encoder-Decoder Networks with Symmetric Skip Connections)
+3. RED_NET (A Recursive Encoder-Decoder Network for Edge Detection)
