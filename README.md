@@ -14,6 +14,7 @@ tensorflow = 2.6
 pytorch = 1.8
 numpy = 1.21
 ```
+# Image Classification
 
 ## Alexnet
 
@@ -54,6 +55,8 @@ Inception-v3 is a convolutional neural network architecture from the Inception f
 <img src="Assets/InceptionV3Architecture.png"/>
 
 [More about InceptionV3](https://paperswithcode.com/method/inception-v3)
+
+# AutoEncoders
 
 ## Upcoming Neural Networks
 
