@@ -52,19 +52,19 @@ test_data_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1/
 # Get Training, Testing and Validation Data
 train_data = train_data_generator.flow_from_directory(
                         TRAIN_IMG_DIR,
-                        target_size=(299, 299),
+                        target_size=(256, 256),
                         batch_size=BATCH_SIZE,
                         class_mode='categorical')
 
 valid_data = validation_data_generator.flow_from_directory(
                         VALID_IMG_DIR,
-                        target_size=(299, 299),
+                        target_size=(256, 256),
                         batch_size=BATCH_SIZE,
                         class_mode='categorical')
 
 test_data = test_data_generator.flow_from_directory(
                         TEST_IMG_DIR,
-                        target_size=(299, 299),
+                        target_size=(256, 256),
                         batch_size=BATCH_SIZE,
                         class_mode='categorical')
 

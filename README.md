@@ -56,7 +56,15 @@ Inception-v3 is a convolutional neural network architecture from the Inception f
 
 [More about InceptionV3](https://paperswithcode.com/method/inception-v3)
 
-# AutoEncoders
+## DenseNet
+
+Introduced by Huang et al. in Densely Connected Convolutional Networks
+
+A DenseNet is a type of convolutional neural network that utilises dense connections between layers, through Dense Blocks, where we connect all layers (with matching feature-map sizes) directly with each other. To preserve the feed-forward nature, each layer obtains additional inputs from all preceding layers and passes on its own feature-maps to all subsequent layers.
+
+<img src="Assets/DenseNet.png"/>
+
+[More about InceptionV3](https://paperswithcode.com/method/densenet)
 
 ## Upcoming Neural Networks
 
