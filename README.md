@@ -1,6 +1,6 @@
 # Code that NeuralNet
 
-An attempt to code differnt SOTA deep learning models using Tensorflow and PyTorch. All the model architure diagrams used in the Readme were considered for reference while coding the models. The tf and torch implementations of all the models are present in Tensorflow and Pytorch folders respectively. 
+An attempt to code different SOTA deep learning models using Tensorflow and PyTorch. All the model architure diagrams used in the Readme were considered for reference while coding the models. The tf and torch implementations of all the models are present in Tensorflow and Pytorch folders respectively. 
 
 <p align="center">
 <img src="https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white"/>
@@ -70,9 +70,8 @@ A DenseNet is a type of convolutional neural network that utilises dense connect
 
 ### Image Classification:
 
-1. DenseNet
-2. EfficientNet
-3. Vision Transformer
+1. EfficientNet
+2. Vision Transformer
 
 ### AutoEncoders:
 
