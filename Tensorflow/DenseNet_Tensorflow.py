@@ -5,7 +5,7 @@ from tensorflow.keras.layers import Conv2D, BatchNormalization
 from tensorflow.keras.layers import Input, Concatenate
 from tensorflow.keras.layers import Activation, MaxPool2D
 from tensorflow.keras.layers import AveragePooling2D, GlobalAveragePooling2D
-from tensorflow.keras.layers import Dense, Dropout
+from tensorflow.keras.layers import Dense
 
 # Basic conv block of densenet consits of -> BatchNorm -> ReLU -> Conv2D
 def ConvBlock(x, filters, kernel_size):
