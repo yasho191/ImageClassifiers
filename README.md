@@ -8,13 +8,70 @@ An attempt to code different SOTA deep learning models using Tensorflow and PyTo
 </p>
 
 General Dependencies for Running the code:
-```
+
+```md
 python = 3.8
 tensorflow = 2.6
 pytorch = 1.8
 numpy = 1.21
+opencv = 4.5
+scipy = 1.8
 ```
-# Image Classification
+
+I suggest you to run the Pytorch and Tensorflow code in 2 different venv as running them together can cause some issues. To create a venv use 'conda'.
+
+```sh
+conda create -n tensorflow python=3.8
+conda create -n pytorch python=3.8
+```
+
+### Training your own model (Tensorflow):
+
+In order to train your own tensorflow model copy the dataset into the data folder. Put the training testing and validation images in ther respective folders. Then run the tensorflow_training.py file. Pytorch training loop can be found under the PyTorch directory but pytorch_training.py is work in progress.
+
+```sh
+python3 tensorflow_training.py -h
+
+# Output:
+# positional arguments:
+#   model                 Name of the model. Must be one of: 
+#                         1. AlexNet 
+#                         2. DenseNet 
+#                         3. InceptionV3 
+#                         4. ResNet 
+#                         5. VGG
+#   shape                 Input Shape
+#   classes               Number of classes
+
+# optional arguments:
+#   -h, --help  
+#   -e, --epochs EPOCHS
+#   -b, --batch_size BATCH_SIZE
+
+python3 tensorflow_training.py <model_name> <1d-shape> <classes> 
+```
+
+This model will get saved in the Models directory from where you can load it and use for inference. Currently Checkpoint functionality is not available
+
+### Inference (Tensorflow):
+
+To perform predicions using models use the tensorflow_inference.py this file takes in 3 arguments the pretrained model path (keras model or .h5), classes and path to the image to be predicted. The prediction is unrefined and will return an array as the output. Size of array will = number of categories for which the model was trained.
+
+```sh
+python3 tensorflow_inference.py -h
+
+# Output:
+# positional arguments:
+#   model_path  Path to pre-trained model
+#   image       Path to image
+
+# optional arguments:
+#   -h, --help  show this help message and exit
+
+python3 tensorflow_inference.py <model_path> <img_path>
+```
+
+## Image Classification
 
 ## Alexnet
 
@@ -73,8 +130,7 @@ A DenseNet is a type of convolutional neural network that utilises dense connect
 1. EfficientNet
 2. Vision Transformer
 
-### AutoEncoders:
+### TODO:
 
-1. Simple VAE
-2. RedNEet (Image Restoration Using Very Deep Convolutional Encoder-Decoder Networks with Symmetric Skip Connections)
-3. RED_NET (A Recursive Encoder-Decoder Network for Edge Detection)
+- <input type="checkbox" disabled /> PyTorch Training
+- <input type="checkbox" disabled /> PyTorch Inference

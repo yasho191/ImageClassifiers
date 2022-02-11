@@ -1,3 +1,4 @@
 *.DS_Store
 *.amlignore
 *.amlignore_amltmp
+__pycache__/
