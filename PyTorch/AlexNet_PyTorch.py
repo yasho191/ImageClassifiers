@@ -31,7 +31,7 @@ class AlexNet(nn.Module):
             nn.ReLU(),
             nn.Dropout(0.2),
             nn.Linear(in_features=4096, out_features=classes),
-            nn.Softmax()
+            nn.Softmax(dim=1)
         )
 
     # Forward Feed
@@ -39,7 +39,3 @@ class AlexNet(nn.Module):
         x = self.conv_net(x)
         output = self.densenet(x)
         return output
-
-# initialize model
-model = AlexNet(classes=10)
-print(model)

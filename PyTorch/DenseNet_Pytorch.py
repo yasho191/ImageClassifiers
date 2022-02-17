@@ -95,6 +95,3 @@ class DenseNet(nn.Module):
         x = self.last_block(x)
 
         return x
-
-model = DenseNet(1000)
-print(model)

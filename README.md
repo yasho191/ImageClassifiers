@@ -1,4 +1,4 @@
-# Code that NeuralNet
+# Coding NeuralNets
 
 An attempt to code different SOTA deep learning models using Tensorflow and PyTorch. All the model architure diagrams used in the Readme were considered for reference while coding the models. The tf and torch implementations of all the models are present in Tensorflow and Pytorch folders respectively. 
 
@@ -11,7 +11,7 @@ General Dependencies for Running the code:
 
 ```md
 python = 3.8
-tensorflow = 2.6
+tensorflow >= 2.6
 pytorch = 1.8
 numpy = 1.21
 opencv = 4.5
@@ -25,12 +25,13 @@ conda create -n tensorflow python=3.8
 conda create -n pytorch python=3.8
 ```
 
-### Training your own model (Tensorflow):
+### Training your own model (Tensorflow)
 
-In order to train your own tensorflow model copy the dataset into the data folder. Put the training testing and validation images in ther respective folders. Then run the tensorflow_training.py file. Pytorch training loop can be found under the PyTorch directory but pytorch_training.py is work in progress.
+In order to train your own tensorflow model copy the dataset into the data folder. Put the training testing and validation images in ther respective folders. Then run the tensorflow_training.py file.
 
 ```sh
-python3 tensorflow_training.py -h
+cd Deep-Learning-Implementation
+python3 tensorflow_train.py -h
 
 # Output:
 # positional arguments:
@@ -48,16 +49,17 @@ python3 tensorflow_training.py -h
 #   -e, --epochs EPOCHS
 #   -b, --batch_size BATCH_SIZE
 
-python3 tensorflow_training.py <model_name> <1d-shape> <classes> 
+python3 tensorflow_train.py <model_name> <1d-shape> <classes> 
 ```
 
 This model will get saved in the Models directory from where you can load it and use for inference. Currently Checkpoint functionality is not available
 
-### Inference (Tensorflow):
+### Inference (Tensorflow)
 
-To perform predicions using models use the tensorflow_inference.py this file takes in 3 arguments the pretrained model path (keras model or .h5), classes and path to the image to be predicted. The prediction is unrefined and will return an array as the output. Size of array will = number of categories for which the model was trained.
+To perform predicions using models use the tensorflow_inference.py this file takes in 3 arguments the pretrained model path (keras model or .h5), classes and path to the image to be predicted. The prediction is unrefined and will return an array as the output. Size of array will = number of categories for which the model was trained. You can upload the pretrained model file in the Models directory.
 
 ```sh
+cd Deep-Learning-Implementation
 python3 tensorflow_inference.py -h
 
 # Output:
@@ -69,6 +71,40 @@ python3 tensorflow_inference.py -h
 #   -h, --help  show this help message and exit
 
 python3 tensorflow_inference.py <model_path> <img_path>
+```
+
+### Training your own model (PyTorch)
+
+In order to train your own torch model copy the dataset into the data folder. Put the training testing and validation images in ther respective folders. Then run the torch_train.py file. Make sure that files like '.ipynb_checkpoints', '.DS_Store' are not present in your data directory. Existence of such files will cause errors. Checkpoints are aslo available for Training Pytorch models.
+
+```sh
+cd Deep-Learning-Implementation
+python3 torch_train.py -h
+
+# Output:
+# positional arguments:
+#   model                 Name of the model. Must be one of: 
+#                         1. AlexNet 
+#                         2. DenseNet 
+#                         3. InceptionV3 
+#                         4. ResNet 
+#                         5. VGG
+#   shape                 Input Shape
+#   classes               Number of classes
+
+# optional arguments:
+#   -h, --help  
+#   -e, --epochs EPOCHS
+#   -b, --batch_size BATCH_SIZE
+
+python3 torch_train.py <model_name> <1d-shape> <classes> 
+```
+
+The torch_train.py file will give you information of training/validation LOSS as well as ACCURACY after every epoch in the form of:
+
+```py
+# Epoch 12  Step: 301   Loss: 0.6163562190532684    Acc: 0.675  Validation Loss: 0.515474945306778  Val Acc: 0.75
+# Epoch 13  Step: 326   Loss: 0.5914487493038177    Acc: 0.71   Validation Loss: 0.5022154450416565 Val Acc: 0.8125
 ```
 
 ## Image Classification
@@ -130,7 +166,6 @@ A DenseNet is a type of convolutional neural network that utilises dense connect
 1. EfficientNet
 2. Vision Transformer
 
-### TODO:
+### TODO
 
-- <input type="checkbox" disabled /> PyTorch Training
 - <input type="checkbox" disabled /> PyTorch Inference

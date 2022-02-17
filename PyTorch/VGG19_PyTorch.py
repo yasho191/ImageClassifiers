@@ -68,7 +68,7 @@ class VGG19(nn.Module):
             nn.Dropout(0.2),
             nn.Linear(in_features=4096, out_features=self.classes),
             # Softmax Activation
-            nn.Softmax()
+            nn.Softmax(dim=1)
         )
 
     # Forward Network
@@ -76,7 +76,3 @@ class VGG19(nn.Module):
         x = self.VGG(x)
         output = self.densenet(x)
         return output
-
-# Initialize Model
-model = VGG19(classes=100)
-print(model)

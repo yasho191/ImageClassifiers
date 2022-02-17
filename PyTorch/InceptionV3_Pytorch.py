@@ -157,7 +157,7 @@ class FineTuneBlock(nn.Module):
         self.dropout = nn.Dropout(0.2)
 
         self.dense2 = nn.Linear(1024, classes)
-        self.softmax = nn.Softmax()
+        self.softmax = nn.Softmax(dim=1)
     
     def forward(self, x):
         x = self.avg_pool(x)
@@ -260,7 +260,3 @@ class InceptionV3(nn.Module):
         output2 = self.softmax(x)
 
         return output1, output2
-
-# output1 = Early convergence
-# output2 = Final convergence
-model = InceptionV3(classes=100)

@@ -136,5 +136,3 @@ class ResNet34(nn.Module):
 
         return output
 
-model = ResNet34(classes=100)
-print(model)
