@@ -89,7 +89,6 @@ python3 torch_train.py -h
 #                         3. InceptionV3 
 #                         4. ResNet 
 #                         5. VGG
-#   shape                 Input Shape
 #   classes               Number of classes
 
 # optional arguments:
@@ -97,10 +96,10 @@ python3 torch_train.py -h
 #   -e, --epochs EPOCHS
 #   -b, --batch_size BATCH_SIZE
 
-python3 torch_train.py <model_name> <1d-shape> <classes> 
+python3 torch_train.py <model_name> <classes> 
 ```
 
-The torch_train.py file will give you information of training/validation LOSS as well as ACCURACY after every epoch in the form of:
+The deafult image size for PyTorch models is 256, 256, 3. The torch_train.py file will give you information of training/validation LOSS as well as ACCURACY after every epoch in the form of:
 
 ```py
 # Epoch 12  Step: 301   Loss: 0.6163562190532684    Acc: 0.675  Validation Loss: 0.515474945306778  Val Acc: 0.75
