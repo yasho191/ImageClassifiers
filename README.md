@@ -18,7 +18,7 @@ opencv = 4.5
 scipy = 1.8
 ```
 
-I suggest you to run the Pytorch and Tensorflow code in 2 different venv as running them together can cause some issues. To create a venv use 'conda'.
+I would suggest you to run the Pytorch and Tensorflow code in 2 different venv as running them together can cause some issues. To create a venv use 'conda'.
 
 ```sh
 conda create -n tensorflow python=3.8
