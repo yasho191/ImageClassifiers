@@ -93,6 +93,7 @@ python3 torch_train.py -h
 
 # optional arguments:
 #   -h, --help  
+#   -s, --shape SHAPE
 #   -e, --epochs EPOCHS
 #   -b, --batch_size BATCH_SIZE
 
