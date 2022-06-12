@@ -11,6 +11,7 @@ from torch_models import Models
 parser = argparse.ArgumentParser()
 parser.add_argument("model", help="Name of the model. Must be one of: 1. AlexNet 2. DenseNet 3. InceptionV3 4. ResNet 5. VGG", type=str)
 parser.add_argument("classes", help="Number of classes", type=int)
+parser.add_argument("-s", "--shape", help="Shape of Input Image", type=int, default=256)
 parser.add_argument("-e", "--epochs", type=int, default=100)
 parser.add_argument("-b", "--batch_size", type=int, default=16)
 
@@ -20,6 +21,7 @@ MODEL_NAME = args.model
 CLASSES = args.classes
 EPOCHS = args.epochs
 BATCH_SIZE = args.batch_size
+SHAPE = args.shape
 
 if MODEL_NAME not in ["AlexNet", "DenseNet", "InceptionV3", "ResNet", "VGG"]:
     print(f"Invalid argument for model: {MODEL_NAME}")
@@ -41,34 +43,37 @@ print('Model created')
 
 # create training dataset and data loader
 train_dataset = datasets.ImageFolder('data/train', transforms.Compose([
-    transforms.Resize((256, 256)),
+    transforms.Resize((SHAPE, SHAPE)),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ]))
 print('Training Dataset created')
+print(f'Classes Found: {train_dataset.class_to_idx}')
+
 
 train_dataloader = data.DataLoader(
     train_dataset,
     shuffle=True,
     pin_memory=True,
-    num_workers=2,
+    num_workers=0,
     drop_last=True,
     batch_size=BATCH_SIZE)
 print('Training Dataloader created')
 
 # create validation dataset and data loader
 validation_dataset = datasets.ImageFolder('data/validate', transforms.Compose([
-    transforms.Resize((256, 256)),
+    transforms.Resize((SHAPE, SHAPE)),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ]))
 print('Validation Dataset created')
+print(f'Classes Found: {validation_dataset.class_to_idx}')
 
 validation_dataloader = data.DataLoader(
     validation_dataset,
     shuffle=True,
     pin_memory=True,
-    num_workers=2,
+    num_workers=0,
     drop_last=True,
     batch_size=BATCH_SIZE)
 print('Validation Dataloader created')
@@ -102,7 +107,6 @@ except:
 # start training!!
 print('Starting training...')
 for epoch in range(last_epoch, EPOCHS):
-    lr_scheduler.step()
     model.train()
     train_acc = 0
     train_loss = 0
@@ -146,7 +150,7 @@ for epoch in range(last_epoch, EPOCHS):
         val_acc += accuracy.item() / classes.size(0)
 
     print(f'Epoch {epoch+1} \tSteps: {total_steps} \tLoss: {train_loss/len(train_dataloader)} \tAcc: {train_acc/len(train_dataloader)} \tValidation Loss: {val_loss / len(validation_dataloader)} \tVal Acc: {val_acc / len(validation_dataloader)}')
-               
+    lr_scheduler.step()           
     # save checkpoints after every 5 epochs
     if epoch % 5 == 0:
         CHECK_FOLDER = os.path.isdir(f'ckpt/{MODEL_NAME}')

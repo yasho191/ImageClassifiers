@@ -65,16 +65,17 @@ class DownSample(nn.Module):
 class DenseNet(nn.Module):
     def __init__(self, classes):
         super(DenseNet, self).__init__()
-
+        self.classes = classes
         self.conv2d_1 = ConvBlock(3, 32, (7,7), 2, 3)
         self.max_pool = nn.MaxPool2d((3,3), 2, 1)
 
-        self.last_block = nn.Sequential(
-            nn.AvgPool2d((7,7)),
-            nn.Flatten(),
-            nn.Linear(32, classes),
-            nn.Softmax(dim=1)
-        )
+    def last_block(self, x): 
+        x = nn.AvgPool2d((7,7))(x)
+        x = nn.Flatten()(x)
+        features = x.shape[1]
+        x = nn.Linear(features, self.classes)(x)
+        x = nn.Softmax(dim=1)(x)
+        return x
     
     # Dense Blocks followed by Downsample Blocks
     # Block sizes = 6, 12, 24, 16

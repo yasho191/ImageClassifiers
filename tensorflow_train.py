@@ -4,7 +4,7 @@ import argparse
 from tensorflow_models import Models
 
 parser = argparse.ArgumentParser()
-parser.add_argument("model", help="Name of the model. Must be one of: 1. AlexNet 2. DenseNet 3. InceptionV3\n4. ResNet\n5. VGG", type=str)
+parser.add_argument("model", help="Name of the model. Must be one of: 1. AlexNet 2. DenseNet 3. InceptionV3\n4. ResNet\n5. VGG\n6. MobileNetV2", type=str)
 parser.add_argument("shape", help="Input Shape", type=int, default=(256, 256, 3))
 parser.add_argument("classes", help="Number of classes", type=int)
 parser.add_argument("-e", "--epochs", type=int, default=100)
@@ -18,7 +18,7 @@ CLASSES = args.classes
 EPOCHS = args.epochs
 BATCH_SIZE = args.batch_size
 
-if MODEL_NAME not in ["AlexNet", "DenseNet", "InceptionV3", "ResNet", "VGG"]:
+if MODEL_NAME not in ["AlexNet", "DenseNet", "InceptionV3", "ResNet", "VGG", "MobileNetV2"]:
     print(f"Invalid argument for model: {MODEL_NAME}")
     exit(-1)
 

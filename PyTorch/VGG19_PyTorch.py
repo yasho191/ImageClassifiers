@@ -56,20 +56,22 @@ class VGG19(nn.Module):
             nn.Flatten(),
         )
 
-        # Fully connected Network
-        self.densenet = nn.Sequential(
-            # Dense Layer
-            nn.Linear(in_features=(16*16*512), out_features=4096),
-            nn.ReLU(),
-            # Dropout 0.2
-            nn.Dropout(0.2),
-            nn.Linear(in_features=4096, out_features=4096),
-            nn.ReLU(),
-            nn.Dropout(0.2),
-            nn.Linear(in_features=4096, out_features=self.classes),
-            # Softmax Activation
-            nn.Softmax(dim=1)
-        )
+    # Fully connected Network
+    def densenet(self, x):
+        # Dense Layer
+        features = x.shape[1]
+        x = nn.Linear(in_features=features, out_features=4096)(x)
+        x = nn.ReLU()(x)
+        # Dropout 0.2
+        x = nn.Dropout(0.2)(x)
+        x = nn.Linear(in_features=4096, out_features=4096)(x)
+        x = nn.ReLU()(x)
+        x = nn.Dropout(0.2)(x)
+        x = nn.Linear(in_features=4096, out_features=self.classes)(x)
+        # Softmax Activation
+        x = nn.Softmax(dim=1)(x)
+        return x
+    
 
     # Forward Network
     def forward(self, x):

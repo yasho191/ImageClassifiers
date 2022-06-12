@@ -24,9 +24,6 @@ class AlexNet(nn.Module):
 
         # Sequential Dense network
         self.densenet = nn.Sequential(
-            nn.Linear(in_features=12544, out_features=4096),
-            nn.ReLU(),
-            nn.Dropout(0.2),
             nn.Linear(in_features=4096, out_features=4096),
             nn.ReLU(),
             nn.Dropout(0.2),
@@ -34,8 +31,16 @@ class AlexNet(nn.Module):
             nn.Softmax(dim=1)
         )
 
+    def linear(self, x, features):
+        x = nn.Linear(in_features=features, out_features=4096)(x)
+        x = nn.ReLU()(x)
+        x = nn.Dropout(0.2)(x)
+        return x
+
     # Forward Feed
     def forward(self, x):
         x = self.conv_net(x)
+        features = x.shape[1]
+        x = self.linear(x, features)
         output = self.densenet(x)
         return output

@@ -90,16 +90,7 @@ class ResNet34(nn.Module):
             nn.MaxPool2d((3, 3), 2, padding=1)
         )
 
-        # Last Sequential Block (Dense Block)
-        self.last_block = nn.Sequential(
-            nn.Flatten(),
-            nn.Linear(in_features=(512*5*5), out_features=512),
-            nn.ReLU(),
-            nn.Linear(in_features=512, out_features=256),
-            nn.ReLU(),
-            nn.Linear(in_features=256, out_features=self.classes),
-            nn.Softmax(dim=1)
-        )
+        
 
         self.avg_pool = nn.AvgPool2d((2, 2), padding=1)
 
@@ -119,7 +110,17 @@ class ResNet34(nn.Module):
                     x = identity_block(output, output)(x)
         return x
             
-
+    # Last Sequential Block (Dense Block)
+    def last_block(self, x):
+        x = nn.Flatten()(x)
+        x = nn.Linear(in_features=(512*5*5), out_features=512)(x)
+        x = nn.ReLU()(x)
+        x = nn.Linear(in_features=512, out_features=256)(x)
+        x = nn.ReLU()(x)
+        x = nn.Linear(in_features=256, out_features=self.classes)(x)
+        x = nn.Softmax(dim=1)(x)
+        return x
+        
     def forward(self, x):
         x = self.first_block(x)
         # Define size of sub-blocks and initial filter size
