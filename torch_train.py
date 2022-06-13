@@ -6,7 +6,7 @@ from torch.utils import data
 import torchvision.datasets as datasets
 import torchvision.transforms as transforms
 import argparse
-from torch_models import Models
+from Utils.torch_models import Models
 
 parser = argparse.ArgumentParser()
 parser.add_argument("model", help="Name of the model. Must be one of: 1. AlexNet 2. DenseNet 3. InceptionV3 4. ResNet 5. VGG", type=str)

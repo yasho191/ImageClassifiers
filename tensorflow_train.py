@@ -1,7 +1,7 @@
 import os
 import tensorflow as tf
 import argparse
-from tensorflow_models import Models
+from Utils.tensorflow_models import Models
 
 parser = argparse.ArgumentParser()
 parser.add_argument("model", help="Name of the model. Must be one of: 1. AlexNet 2. DenseNet 3. InceptionV3\n4. ResNet\n5. VGG\n6. MobileNetV2", type=str)
@@ -58,7 +58,6 @@ valid_data = validation_data_generator.flow_from_directory(
 
 print("Training Data Indices: ", train_data.class_indices)
 print("Validation Data Indices: ", valid_data.class_indices)
-
 # learning rate scheduler can also be applied based on requirements
 lr_schedule = tf.keras.callbacks.ReduceLROnPlateau(
         monitor="val_loss",
