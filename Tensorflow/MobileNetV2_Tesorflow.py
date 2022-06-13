@@ -85,5 +85,5 @@ def MobileNetV2(shape, num_classes):
     x_output = Dense(num_classes, activation='softmax')(x)
 
     # Build Model
-    model = tf.keras.models.Model(inputs = x_input, outputs = x_output, name='MobileNetV3')
+    model = tf.keras.models.Model(inputs = x_input, outputs = x_output, name='MobileNetV2')
     return model

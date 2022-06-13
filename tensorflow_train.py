@@ -22,11 +22,15 @@ if MODEL_NAME not in ["AlexNet", "DenseNet", "InceptionV3", "ResNet", "VGG", "Mo
     print(f"Invalid argument for model: {MODEL_NAME}")
     exit(-1)
 
-
-model = Models(MODEL_NAME, SHAPE, CLASSES)
-
-model = model.ret_model()
-print(model.summary())
+if os.path.exists(f'ckpt/{MODEL_NAME}/best_model'):
+    model = tf.keras.models.load_model(f"ckpt/{MODEL_NAME}/best_model")
+    print('Restoring model from previous checkpoint...')
+else:
+    print('No checkpoints found.\nInitializing new model...')
+    os.mkdir(f'ckpt/{MODEL_NAME}')
+    model = Models(MODEL_NAME, SHAPE, CLASSES)
+    model = model.ret_model()
+    print(model.summary())
 
 # Initialize Variables
 TRAIN_IMG_DIR = os.path.join('data/train')
@@ -38,6 +42,7 @@ train_data_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1
 validation_data_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1/255.)
 
 CLASS_MODE = 'sparse'
+# CLASS_MODE = 'binary'
 # Get Training, Testing and Validation Data
 train_data = train_data_generator.flow_from_directory(
                         TRAIN_IMG_DIR,
@@ -53,6 +58,7 @@ valid_data = validation_data_generator.flow_from_directory(
 
 print("Training Data Indices: ", train_data.class_indices)
 print("Validation Data Indices: ", valid_data.class_indices)
+
 # learning rate scheduler can also be applied based on requirements
 lr_schedule = tf.keras.callbacks.ReduceLROnPlateau(
         monitor="val_loss",
@@ -74,11 +80,13 @@ loss = tf.keras.losses.SparseCategoricalCrossentropy(
 # Compile models with Adam Optimizer or SGD
 model.compile(optimizer=tf.keras.optimizers.Adam(), loss=loss, metrics='accuracy')
 
+checkpoint = tf.keras.callbacks.ModelCheckpoint(f"ckpt/{MODEL_NAME}/best_model", save_best_only=True)
+
 history = model.fit(
     train_data,
     validation_data = valid_data,
     epochs = EPOCHS,
-    callbacks=[lr_schedule]
+    callbacks=[lr_schedule, checkpoint]
 )
 
 # Save model

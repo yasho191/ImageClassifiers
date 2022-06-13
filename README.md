@@ -52,7 +52,7 @@ python3 tensorflow_train.py -h
 python3 tensorflow_train.py <model_name> <1d-shape> <classes> 
 ```
 
-This model will get saved in the Models directory from where you can load it and use for inference. Currently Checkpoint functionality is not available
+This model will get saved in the Models directory from where you can load it and use for inference. Checkpoints will be created while model training which will be stored in the **ckpt** directory with naming convention as "MODEL_NAME/best_model".
 
 ### Inference (Tensorflow)
 
