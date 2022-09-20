@@ -30,7 +30,7 @@ conda create -n pytorch python=3.9
 In order to train your own tensorflow model copy the dataset into the data folder. Put the training testing and validation images in ther respective folders. Then run the tensorflow_training.py file.
 
 ```sh
-cd Deep-Learning-Implementation
+cd ImageClassifiers
 python3 tensorflow_train.py -h
 
 # Output:
@@ -60,7 +60,7 @@ This model will get saved in the Models directory from where you can load it and
 To perform predicions using models use the tensorflow_inference.py this file takes in 3 arguments the pretrained model path (keras model or .h5), classes and path to the image to be predicted. The prediction is unrefined and will return an array as the output. Size of array will = number of categories for which the model was trained. You can upload the pretrained model file in the Models directory.
 
 ```sh
-cd Deep-Learning-Implementation
+cd ImageClassifiers
 python3 tensorflow_inference.py -h
 
 # Output:
@@ -79,7 +79,7 @@ python3 tensorflow_inference.py <model_path> <img_path>
 In order to train your own torch model copy the dataset into the data folder. Put the training testing and validation images in ther respective folders. Then run the torch_train.py file. Make sure that files like '.ipynb_checkpoints', '.DS_Store' are not present in your data directory. Existence of such files will cause errors. Checkpoints are aslo available for Training Pytorch models.
 
 ```sh
-cd Deep-Learning-Implementation
+cd ImageClassifiers
 python3 torch_train.py -h
 
 # Output:
