@@ -9,7 +9,7 @@ import argparse
 from Utils.torch_models import Models
 
 parser = argparse.ArgumentParser()
-parser.add_argument("model", help="Name of the model. Must be one of: 1. AlexNet 2. DenseNet 3. InceptionV3 4. ResNet 5. VGG", type=str)
+parser.add_argument("model", help="Name of the model. Must be one of: 1. AlexNet 2. DenseNet 3. InceptionV3 4. ResNet 5. VGG 6. MobileNetV2", type=str)
 parser.add_argument("classes", help="Number of classes", type=int)
 parser.add_argument("-s", "--shape", help="Shape of Input Image", type=int, default=256)
 parser.add_argument("-e", "--epochs", type=int, default=100)

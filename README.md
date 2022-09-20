@@ -1,6 +1,6 @@
 # Coding NeuralNets
 
-An attempt to code different SOTA deep learning models using Tensorflow and PyTorch. All the model architure diagrams used in the Readme were considered for reference while coding the models. The tf and torch implementations of all the models are present in Tensorflow and Pytorch folders respectively. 
+An attempt to code different SOTA deep learning models using Tensorflow and PyTorch. All the model architure diagrams used in the Readme were considered for reference while coding the models. The tf and torch implementations of all the models are present in Tensorflow and Pytorch folders respectively. The models in this repository might not be upto the standard of the pytorch and tensorflow and only a specific variant of each model has been developed for example the ResNet implementation has the ResNet34 variant only. You can use this repository to explore, learn and play around with SOTA classifier models.
 
 <p align="center">
 <img src="https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white"/>
@@ -10,7 +10,7 @@ An attempt to code different SOTA deep learning models using Tensorflow and PyTo
 General Dependencies for Running the code:
 
 ```md
-python = 3.8
+python = 3.9
 tensorflow >= 2.6
 pytorch = 1.8
 numpy = 1.21
@@ -21,8 +21,8 @@ scipy = 1.8
 I would suggest you to run the Pytorch and Tensorflow code in 2 different venv as running them together can cause some issues. To create a venv use 'conda'.
 
 ```sh
-conda create -n tensorflow python=3.8
-conda create -n pytorch python=3.8
+conda create -n tensorflow python=3.9
+conda create -n pytorch python=3.9
 ```
 
 ### Training your own model (Tensorflow)
@@ -41,6 +41,7 @@ python3 tensorflow_train.py -h
 #                         3. InceptionV3 
 #                         4. ResNet 
 #                         5. VGG
+#                         6. MobileNetV2
 #   shape                 Input Shape
 #   classes               Number of classes
 
@@ -89,6 +90,7 @@ python3 torch_train.py -h
 #                         3. InceptionV3 
 #                         4. ResNet 
 #                         5. VGG
+#                         6. MobileNetV2
 #   classes               Number of classes
 
 # optional arguments:
@@ -163,19 +165,17 @@ A DenseNet is a type of convolutional neural network that utilises dense connect
 
 MobileNetV2 is a convolutional neural network architecture that seeks to perform well on mobile devices. It is based on an inverted residual structure where the residual connections are between the bottleneck layers. The intermediate expansion layer uses lightweight depthwise convolutions to filter features as a source of non-linearity. As a whole, the architecture of MobileNetV2 contains the initial fully convolution layer with 32 filters, followed by 19 residual bottleneck layers.
 
-**Note** : PyTorch Implementation pending
-
 <img src="Assets/MobileNetV2.png"/>
 
 [More about MobileNetV2](https://paperswithcode.com/method/mobilenetv2)
 
 ## Upcoming Neural Networks
 
-### Image Classification:
-
-1. EfficientNet
+1. XceptionNet
 2. Vision Transformer
 
 ### TODO
 
 - <input type="checkbox" disabled /> PyTorch Inference
+
+Anyone Interested to contribute to the Repository is more than welcome to do so. The aim is to code and learn. Interested people are requested not to copy code from official repos and paste it here. Building Neural Nets from scratch helps in better understanding of the Model Architectures and implementations.

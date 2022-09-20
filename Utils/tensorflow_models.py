@@ -1,10 +1,10 @@
 from Tensorflow import AlexNet_Tensorflow, DenseNet_Tensorflow, InceptionV3_Tensorflow
 from Tensorflow import ResNet_Tensorflow, VGG19_Tensorflow, MobileNetV2_Tesorflow
-import tensorflow as tf
+from tensorflow.keras.models import Model
 
 
 class Models:
-    def __init__(self, model_name, shape, classes):
+    def __init__(self, model_name: str, shape: tuple, classes: int) -> None:
         
         models = {
             "AlexNet": AlexNet_Tensorflow.AlexNet(shape, classes),
@@ -17,5 +17,5 @@ class Models:
 
         self.model = models[model_name]
 
-    def ret_model(self):
+    def ret_model(self) -> Model:
         return self.model

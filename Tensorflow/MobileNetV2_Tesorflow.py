@@ -1,7 +1,7 @@
 import tensorflow as tf
 from tensorflow.keras.layers import ReLU, Add, GlobalAveragePooling2D
 from tensorflow.keras.layers import DepthwiseConv2D, Conv2D, BatchNormalization
-from tensorflow.keras.layers import Input, Dropout, Dense
+from tensorflow.keras.layers import Input, Dense
 
 # relu6 is an modified version of relu where the max value == 6
 #         |   ______
@@ -10,38 +10,24 @@ from tensorflow.keras.layers import Input, Dropout, Dense
 #  _______|/
 # -----------------
 
-# BottleNeck1 for Strides == 1
-def Bottleneck1(x, expansion_factor: int, out_filters: int):
+# BottleNeck Block
+def Bottleneck(x, expansion_factor: int, out_filters: int, stride: int):
     x_res = x
-    n_filters = x.shape[-1]
+    in_filters = x.shape[-1]
 
-    x = Conv2D(expansion_factor * n_filters, (1, 1), 1, padding='same', use_bias=False)(x)
-    x = BatchNormalization()(x)
-    x = ReLU(6.0)(x)
-    x = DepthwiseConv2D((3, 3), (1, 1), padding='same', use_bias=False)(x)
+    if expansion_factor > 1:
+        x = Conv2D(expansion_factor * in_filters, (1, 1), 1, padding='same', use_bias=False)(x)
+        x = BatchNormalization()(x)
+        x = ReLU(6.0)(x)
+    x = DepthwiseConv2D((3, 3), stride, padding='same', use_bias=False)(x)
     x = BatchNormalization()(x)
     x = ReLU(6.0)(x)
     x = Conv2D(out_filters, (1, 1), padding='same', use_bias=False)(x)
     x = BatchNormalization()(x)
 
     # Add Residue if and only if in_channels = out_channels
-    if n_filters == out_filters:
+    if in_filters == out_filters and stride == 1:
         x = Add()([x_res, x])
-
-    return x
-
-# BottleNeck2 for Strides == 2
-def Bottleneck2(x, expansion_factor: int, out_filters: int):
-    n_filters = x.shape[-1]
-
-    x = Conv2D(expansion_factor * n_filters, (1, 1), 1, padding='same', use_bias=False)(x)
-    x = BatchNormalization()(x)
-    x = ReLU(6.0)(x)
-    x = DepthwiseConv2D((3, 3), (2, 2), padding='valid', use_bias=False)(x)
-    x = BatchNormalization()(x)
-    x = ReLU(6.0)(x)
-    x = Conv2D(out_filters, (1, 1), padding='same', use_bias=False)(x)
-    x = BatchNormalization()(x)
 
     return x
 
@@ -69,10 +55,10 @@ def MobileNetV2(shape, num_classes):
     # Iterating over all the blocks
     for t, c, n, s in bottleneck_sequence:
         for i in range(n):
-            if i == 0 and s == 2:
-                x = Bottleneck2(x, t, c)
+            if i == 0:
+                x = Bottleneck(x, t, c, s)
             else:
-                x = Bottleneck1(x, t, c)
+                x = Bottleneck(x, t, c, 1)
 
     # End Layers
     x = Conv2D(1280, (1, 1), use_bias=False, padding='same')(x)
@@ -81,7 +67,6 @@ def MobileNetV2(shape, num_classes):
     x = GlobalAveragePooling2D()(x)
 
     # Classifier
-    x = Dropout(0.2)(x)
     x_output = Dense(num_classes, activation='softmax')(x)
 
     # Build Model
